@@ -1,0 +1,45 @@
+{
+  "user1": {
+    "password": "hashedpassword1",
+    "reviews": [
+      {
+        "id": "1",
+        "content": "Great service!"
+      },
+      {
+        "id": "2",
+        "content": "Loved it!"
+      }
+    ],
+    "subscription": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31"
+    }
+  },
+  "Princebusa": {
+    "password": "$2b$10$SgFSctIPZwCLwpaB8C9gUexBFhVtQWPXtudtQQXDpngnGFvOTZl0y",
+    "reviews": [
+      {
+        "id": "1721220907997",
+        "content": "prince"
+      }
+    ],
+    "subscription": {
+      "startDate": "",
+      "endDate": ""
+    }
+  },
+  "rajmakvana@gmail.com": {
+    "password": "$2b$10$VbL4u9CR7qlOg.VBR7TFwu1rPSb7qYUpmHT27u49rLis5SliNW/K2",
+    "reviews": [
+      {
+        "id": "1721381396534",
+        "content": "hello prince"
+      }
+    ],
+    "subscription": {
+      "startDate": "",
+      "endDate": ""
+    }
+  }
+}

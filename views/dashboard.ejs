@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <p>Welcome, <%= username %>!</p>
+    <form id="reviewForm">
+      <label for="review">Enter Customer Review:</label>
+      <textarea id="review" name="review" rows="4" required></textarea>
+      <input type="hidden" id="reviewId">
+      <button type="submit">Submit</button>
+    </form>
+    <div id="reviews">
+      <% reviews.forEach(review => { %>
+        <div class="review">
+          <p><%= review.content %></p>
+          <button onclick="editReview('<%= review.id %>', '<%= review.content %>')">Edit</button>
+          <button onclick="deleteReview('<%= review.id %>')">Delete</button>
+        </div>
+      <% }); %>
+    </div>
+    <h2>Your Script URL</h2>
+    <p>Copy the following script URL and include it in your website:</p>
+    <code>&lt;script src="http://localhost:3000/api/script?username=<%= username %>"&gt;&lt;/script&gt;</code>
+    <br><br>
+    <a href="/logout">Logout</a>
+  </div>
+  <script>
+    async function editReview(id, content) {
+      document.getElementById('review').value = content;
+      document.getElementById('reviewId').value = id;
+    }
+
+    async function deleteReview(id) {
+      const response = await fetch(`/api/reviews/${id}`, { method: 'DELETE' });
+      if (response.ok) {
+        location.reload();
+      }
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const content = document.getElementById('review').value;
+      const id = document.getElementById('reviewId').value;
+      const method = id ? 'PUT' : 'POST';
+      const url = id ? `/api/reviews/${id}` : '/api/reviews';
+      const body = id ? { id, content } : { id: Date.now().toString(), content };
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        location.reload();
+      }
+    });
+  </script>
+</body>
+</html>
